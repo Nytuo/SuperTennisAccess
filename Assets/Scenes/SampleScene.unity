@@ -439,12 +439,13 @@ GameObject:
   m_Component:
   - component: {fileID: 821835521}
   - component: {fileID: 821835520}
-  - component: {fileID: 821835518}
   - component: {fileID: 821835522}
   - component: {fileID: 821835519}
+  - component: {fileID: 821835523}
+  - component: {fileID: 821835518}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -459,12 +460,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.020523781, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.095184
+  m_Radius: 1.25
 --- !u!50 &821835519
 Rigidbody2D:
   serializedVersion: 4
@@ -564,6 +565,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+--- !u!58 &821835523
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821835517}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.49999997
 --- !u!1 &1369106529
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,6 +886,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1688669871 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 9208245501594262390, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
+  m_PrefabInstance: {fileID: 4457864427791545114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4457864427791545114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -890,11 +912,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 130574776020436231, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.914
+      value: 0.077
       objectReference: {fileID: 0}
     - target: {fileID: 130574776020436231, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.191
+      value: 0.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026137526483066124, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
+      propertyPath: m_GravityScale
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4120879303507120178, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
       propertyPath: m_RootOrder
@@ -948,8 +974,32 @@ PrefabInstance:
       propertyPath: m_TagString
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 5285348551938685961, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
+      propertyPath: cc
+      value: 
+      objectReference: {fileID: 1688669871}
+    - target: {fileID: 5285348551938685961, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
+      propertyPath: jumpForce
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285348551938685961, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
+      propertyPath: moveSpeed
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 6814046536510529796, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
       propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208245501594262390, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
+      propertyPath: m_Size.y
+      value: 0.331985
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208245501594262390, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.0009924769
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208245501594262390, guid: e0b8c267804142f47ab94eea577b6557, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

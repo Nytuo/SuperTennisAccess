@@ -7,29 +7,32 @@ public class playerMove : MonoBehaviour
     public bool isJumping = false;
     public float jumpForce;
     public Rigidbody2D rb;
+    public bool canShoot;
+    private GameObject ball;
     private Vector3 _velocity = Vector3.zero;
-    public Collider2D cc;
+
+    private void Start()
+    {
+    }
+
     void FixedUpdate()
     {
         float horizontalMovement = Input.GetAxis("Horizontal") *moveSpeed * Time.deltaTime;
         MovePlayer(horizontalMovement);
+
     }
 
     private void Update()
     {
+        ball = GameObject.FindGameObjectWithTag("ball");
         if (Input.GetButtonDown("Jump") && isJumping == false)
         
         {
             isJumping = true;
         }
-
         if (Input.GetButtonDown("Fire1"))
         {
-            collider.enabled = true;
-        }
-        else
-        {
-            collider.enabled = false;
+            Shoot();
         }
     }
 
@@ -42,6 +45,14 @@ public class playerMove : MonoBehaviour
         {
             rb.AddForce(new Vector2(0f,jumpForce));
             isJumping = false;
+        }
+    }
+
+    private void Shoot()
+    {
+        if (canShoot == true)
+        {
+            ball.GetComponent<Rigidbody2D>().AddForce(new Vector2(-300f, 300f));
         }
     }
 }
