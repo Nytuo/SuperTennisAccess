@@ -6,44 +6,29 @@ using UnityEngine;
 public class ball : MonoBehaviour
 {
     public float speed;
-    Vector2 direction;
+    private Vector2 direction;
 
-    Rigidbody2D rb;
-    
+    private Rigidbody2D rb;
+
+    Vector3 lastVelocity;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        direction = Vector2.one.normalized;
+        /*direction = Vector2.one.normalized;*/
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        rb.velocity = direction * speed;
+        lastVelocity = rb.velocity;
     }
-
+    
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Wall"))
-        {
-            direction.y = -direction.y;
-        }
-        else if (col.gameObject.CompareTag("WallX"))
-        {
-            direction.x = -direction.x;
-        }
-        else if (col.gameObject.CompareTag("player"))
-        {
-            direction.x = -direction.x;
-            if (Input.GetButton("Fire1"))
-            {
-                direction.y = -direction.y;
-            }
-        }
+        var speed = lastVelocity.magnitude;
+        var direction = Vector3.Reflect(lastVelocity.normalized,col.contacts[0].normal);
+        rb.velocity = direction * Mathf.Max(speed, 0f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
+    
 }

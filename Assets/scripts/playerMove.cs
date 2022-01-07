@@ -8,13 +8,10 @@ public class playerMove : MonoBehaviour
     public float jumpForce;
     public Rigidbody2D rb;
     private Vector3 _velocity = Vector3.zero;
-
+    public Collider2D cc;
     void FixedUpdate()
     {
         float horizontalMovement = Input.GetAxis("Horizontal") *moveSpeed * Time.deltaTime;
-
-        
-        
         MovePlayer(horizontalMovement);
     }
 
@@ -24,6 +21,15 @@ public class playerMove : MonoBehaviour
         
         {
             isJumping = true;
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            collider.enabled = true;
+        }
+        else
+        {
+            collider.enabled = false;
         }
     }
 
