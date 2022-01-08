@@ -12,13 +12,14 @@ public class ball : MonoBehaviour
 
     Vector3 lastVelocity;
     private GameObject _player;
-
+    private Vector3 _ballPosition;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         _player = GameObject.FindGameObjectWithTag("player");
         /*direction = Vector2.one.normalized;*/
+        _ballPosition = transform.position;
     }
 
     private void Update()
@@ -31,6 +32,21 @@ public class ball : MonoBehaviour
         var speed = lastVelocity.magnitude;
         var direction = Vector3.Reflect(lastVelocity.normalized,col.contacts[0].normal);
         rb.velocity = direction * Mathf.Max(speed, 0f);
+        if (col.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("PLayer 1 -1");
+            _player.GetComponentInChildren<playerMove>().ResetPositions();
+            transform.position = _ballPosition;
+            rb.velocity = Vector3.zero;
+        }
+        else if (col.gameObject.CompareTag("Wall2"))
+        {
+            Debug.Log("PLayer 2 -1");
+            _player.GetComponentInChildren<playerMove>().ResetPositions();
+            transform.position = _ballPosition;
+            rb.velocity = Vector3.zero;
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -49,4 +65,5 @@ public class ball : MonoBehaviour
             _player.GetComponentInChildren<playerMove>().canShoot = false;
         }
     }
+    
 }
