@@ -9,6 +9,9 @@ TagManager:
   - player
   - ball
   - Wall2
+  - AI
+  - AIJump
+  - player2
   layers:
   - Default
   - TransparentFX

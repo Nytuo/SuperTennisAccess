@@ -13,6 +13,7 @@ public class playerMove : MonoBehaviour
     public Animator animator;
     public SpriteRenderer spriteRenderer;
     private Vector3 _playerPos;
+    public bool isP2;
 
     private void Start()
     {
@@ -21,7 +22,26 @@ public class playerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        float horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        float horizontalMovement;
+        if (isP2 == false)
+        {
+            horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        }
+        else
+        {
+            int dir = 0;
+            if (Input.GetKey("k"))
+            {
+                dir = -1;
+            }
+            else if (Input.GetKey("m"))
+            {
+                dir = 1;
+            }
+
+            horizontalMovement = dir * moveSpeed * Time.deltaTime;
+        }
+
         MovePlayer(horizontalMovement);
         Flip(rb.velocity.x);
         animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
@@ -31,15 +51,31 @@ public class playerMove : MonoBehaviour
     private void Update()
     {
         ball = GameObject.FindGameObjectWithTag("ball");
-        if (Input.GetButtonDown("Jump") && isJumping == false)
-
+        if (isP2 == false)
         {
-            isJumping = true;
+            if (Input.GetButtonDown("Jump") && isJumping == false)
+
+            {
+                isJumping = true;
+            }
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Shoot();
+            }
         }
-
-        if (Input.GetButtonDown("Fire1"))
+        else
         {
-            Shoot();
+            if (Input.GetKeyDown("o") && isJumping == false)
+
+            {
+                isJumping = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+                Shoot();
+            }
         }
     }
 
@@ -47,14 +83,12 @@ public class playerMove : MonoBehaviour
     {
         Vector3 targetVelocity = new Vector2(horizontalMovement, rb.velocity.y);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref _velocity, 0.05f);
-        animator.SetFloat("jumpSpeed", rb.velocity.y*2);
+        animator.SetFloat("jumpSpeed", rb.velocity.y * 2);
 
         if (isJumping == true)
         {
-
             rb.AddForce(new Vector2(0f, jumpForce));
             isJumping = false;
-            
         }
     }
 
